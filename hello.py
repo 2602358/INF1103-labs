@@ -15,7 +15,7 @@ followers += 50
 print("Day1:", followers)
 
 followers += 20
-print("Day1:", followers)
+print("Day2:", followers)
 
 followers -= 10
-print("Day1:", followers)
+print("Day3:", followers)
