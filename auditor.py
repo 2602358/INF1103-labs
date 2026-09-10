@@ -9,6 +9,11 @@ while True: #Run in a continuous loop asking user to enter a stock quantity.
         stock_value = int(stock_quantity) #Accept stock values as integers
         inventory += stock_value #Manage State
         print ("Inventory:",inventory)
+        if stock_value > 500: #Trigger Overstock Alert
+            print("Overstock Alert! 500 units reached")
+            break
+        else:
+            continue
     elif not stock_quantity.isdigit():
         if stock_quantity.startswith("-"): #Enforce business rules
             print ("Negative numbers rejected. Please enter a valid number")
