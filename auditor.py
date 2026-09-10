@@ -5,7 +5,9 @@ while True:
     if stock_quantity.lower() == "quit":
         print("Quit. Total inventory:", inventory)
         break
-    else:
+    elif stock_quantity.isdigit():
         stock_value = int(stock_quantity)
         inventory += stock_value
         print ("Inventory:",inventory)
+    else:
+            print("Error. Please enter a valid number")
