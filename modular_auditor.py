@@ -12,13 +12,22 @@ def get_valid_input(valid_input):
         else:
                 print("Error. Please enter a valid number")
         return "failed"
-         
+    
+def process_delivery(current_total, new_value):
+    return current_total + new_value
 
+def calculate_tax(amount):
+    return amount * 0.10
+
+def generate_report(inventory, failed_enteries):
+    print("Quit. Total Units: ", inventory)
+    print("Failed attempts: ", failed_enteries)
+
+         
 while True: #Run in a continuous loop asking user to enter a stock quantity.
         stock_input = get_valid_input("Enter Stock Quantity (Enter 'quit' to quit): ")
         if stock_input == "quit": #Until the user types quit.
-            print("Quit. Total inventory:", inventory) #Reporting
-            print("Number of failed/rejected enteries: ", failed_enteries)
+            generate_report(inventory, failed_enteries)
             break
         elif stock_input == "failed":
                 failed_enteries += 1
