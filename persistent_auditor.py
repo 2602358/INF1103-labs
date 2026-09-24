@@ -28,16 +28,26 @@ def generate_report(inventory, total_tax, deliveries_processed, failed_enteries)
     print("Deliveries Processed: ", deliveries_processed)
     print("Failed attempts: ", failed_enteries)
 
+def load_inventory():
+    with open("inventory.txt", "r") as file:
+        lines = file.readlines()
+        inventory_read = lines[0].strip()
+        history_read = lines[1].strip()
+        total_tax_read = lines[2].strip()
+        for line in lines:
+            print(line.strip())
+    return inventory_read, history_read, total_tax_read
+
+inventory_read, history_read, total_tax_read = load_inventory()
+
 def save_inventory(inventory, history, total_tax):
     with open("inventory.txt", "a") as file:
-         file.write ("Inventory: ")
-         file.write (str(inventory) + "\n")
-         file.write ("total_tax: ")
-         file.write (str(history) + "\n")
-         file.write ("Total_tax: ")
-         file.write (str(total_tax) + "\n")
-        
-
+        file.write ("Inventory: ")
+        file.write (str(inventory) + "\n")
+        file.write ("total_tax: ")
+        file.write (str(history) + "\n")
+        file.write ("Total_tax: ")
+        file.write (str(total_tax) + "\n")
 
 while True: #Run in a continuous loop asking user to enter a stock quantity.
         stock_input = get_valid_input("Enter Stock Quantity (Enter 'quit' to quit): ")
