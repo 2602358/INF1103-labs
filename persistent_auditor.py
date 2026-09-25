@@ -44,7 +44,7 @@ def save_inventory(inventory, history, total_tax):
     with open("inventory.txt", "a") as file:
         file.write ("Inventory: ")
         file.write (str(inventory) + "\n")
-        file.write ("total_tax: ")
+        file.write ("Order history: ")
         file.write (str(history) + "\n")
         file.write ("Total_tax: ")
         file.write (str(total_tax) + "\n")
