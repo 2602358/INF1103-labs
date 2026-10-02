@@ -25,23 +25,23 @@ def save_inventory(inventory):
 
 # --- 2. Input Validation Functions ---
 
-def get_valid_name(prompt):
+def get_valid_name(valid_name):
     while True:
-        name_input = input(prompt).strip()
+        name_input = input(valid_name).strip()
         if name_input:
             return name_input
         print("Error: Product name cannot be empty.")
 
-def get_valid_stock(prompt):
+def get_valid_stock(valid_stock):
     while True:
-        stock_quantity = input(prompt).strip()
+        stock_quantity = input(valid_stock).strip()
         if stock_quantity.isdigit():
             return int(stock_quantity)
         elif stock_quantity.startswith("-"):
             print("Negative numbers rejected. Please enter a valid number.")
         else:
             print("Error. Please enter a valid positive number.")
-        return None  # Matches your original "failed" fallback mechanism logic
+        return None
 
 
 # --- 3. Data Manipulation Functions ---
