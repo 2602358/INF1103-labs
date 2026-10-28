@@ -1,0 +1,4 @@
+1001,mouse, 1
+1002,cpu, 10
+1003,keyboard, 5
+1004, motherboard, 6
