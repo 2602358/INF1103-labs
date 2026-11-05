@@ -38,5 +38,13 @@
         "price": 35.0,
         "stock": 20,
         "weight": 0.3
+    },
+    {
+        "type": "digital",
+        "id": "P006",
+        "name": "Windows 11",
+        "price": 20.0,
+        "stock": 50,
+        "size": 25.0
     }
 ]
