@@ -1,6 +1,16 @@
 from file_handling import load_inventory, save_inventory
-from product_class import Product
+from physical_product_class import Physical_product
+from digital_product_class import Digital_product
 
+def get_valid_p_or_d(prompt):
+    while True:
+        reply = input(prompt).strip()
+        if reply.strip() == "p":
+            return reply
+        elif reply.strip() == "d":
+            return reply
+        else:
+            print("Error")
 
 def get_valid_name(prompt):
     while True:
@@ -31,16 +41,51 @@ def get_valid_stock(prompt):
         else:
             print("Error. Please enter a valid positive number.")
 
+def get_valid_weight(prompt):
+    while True:
+        try:
+            value = float(input(prompt).strip())
+            if value >= 0:
+                return value
+            print("Negative weight rejected.")
+        except ValueError:
+            print("Error. Please enter a valid price.")
+
+def get_valid_size(prompt):
+    while True:
+        try:
+            value = float(input(prompt).strip())
+            if value >= 0:
+                return value
+            print("Negative size rejected.")
+        except ValueError:
+            print("Error. Please enter a valid price.")
 
 def add_product(inventory):
-    print("\n--- Add New Product ---")
-    name = get_valid_name("Enter Product Name: ")
-    price = get_valid_price("Enter Price: ")
-    stock = get_valid_stock("Enter Stock Quantity: ")
-    product = Product(inventory.get_next_id(), name, price, stock)
-    inventory.add_product(product)
-    print(f"\nSuccessfully added: ID: {product.product_id}, "
-          f"Name: {product.name}, Stock: {product.stock}")
+        reply = get_valid_p_or_d("Enter p or d to add a physical or digital product respectively: ")
+        if reply == "p":
+            print("\n--- Add New Product ---")
+            name = get_valid_name("Enter Product Name: ")
+            price = get_valid_price("Enter Price: ")
+            stock = get_valid_stock("Enter Stock Quantity: ")
+            weight = get_valid_weight("Enter Weight(kg): ")
+            product = Physical_product(inventory.get_next_id(), name, price, stock, weight, )
+            inventory.add_product(product)
+            print(f"\nSuccessfully added: ID: {product.product_id}, "
+                    f"Name: {product.name}, Stock: {product.stock}, Weight: {product.weight}")
+            print(product.get_fulfilment_info())
+
+        elif reply == "d":
+            print("\n--- Add New Product ---")
+            name = get_valid_name("Enter Product Name: ")
+            price = get_valid_price("Enter Price: ")
+            stock = get_valid_stock("Enter Stock Quantity: ")
+            size = get_valid_size("Enter size(gb): ")
+            product = Digital_product(inventory.get_next_id(), name, price, stock, size)
+            inventory.add_product(product)
+            print(f"\nSuccessfully added: ID: {product.product_id}, "
+                        f"Name: {product.name}, Stock: {product.stock}, Size: {product.size}")
+            product.get_fulfilment_info()
 
 
 def update_stock(inventory):

@@ -34,7 +34,7 @@ class Inventory:
             print("No products to display.")
             return
         
-        print(f"{'ID':<10}{'Name':<20}{'Price':<10}{'Stock':<10}")
-        print("-" * 50)
+        print(f"{'ID':<10}{'Name':<20}{'Price':<10}{'Stock':<10}{'Weight/Size':<12}")
+        print("-" * 62)
         for product in products:
             product.display_information()

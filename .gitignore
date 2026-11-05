@@ -1,1 +1,7 @@
 Dockerfile
+__pycache__/canbeshipped.cpython-314.pyc
+__pycache__/digital_product_class.cpython-314.pyc
+__pycache__/file_handling.cpython-314.pyc
+__pycache__/inventory_class.cpython-314.pyc
+__pycache__/physical_product_class.cpython-314.pyc
+__pycache__/product_class.cpython-314.pyc

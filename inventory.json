@@ -1,0 +1,42 @@
+[
+    {
+        "type": "physical",
+        "id": "P001",
+        "name": "PC",
+        "price": 3500.0,
+        "stock": 3,
+        "weight": 3.1
+    },
+    {
+        "type": "physical",
+        "id": "P002",
+        "name": "keyboard",
+        "price": 150.0,
+        "stock": 20,
+        "weight": 0.25
+    },
+    {
+        "type": "digital",
+        "id": "P003",
+        "name": "Microsoft Office",
+        "price": 20.0,
+        "stock": 5,
+        "size": 10.0
+    },
+    {
+        "type": "physical",
+        "id": "P004",
+        "name": "Mouse",
+        "price": 50.0,
+        "stock": 20,
+        "weight": 0.1
+    },
+    {
+        "type": "physical",
+        "id": "P005",
+        "name": "Mousepad",
+        "price": 35.0,
+        "stock": 20,
+        "weight": 0.3
+    }
+]
