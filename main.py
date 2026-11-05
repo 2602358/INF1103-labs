@@ -73,7 +73,7 @@ def add_product(inventory):
             inventory.add_product(product)
             print(f"\nSuccessfully added: ID: {product.product_id}, "
                     f"Name: {product.name}, Stock: {product.stock}, Weight: {product.weight}")
-            print(product.get_fulfilment_info())
+            product.get_fulfilment_info()
 
         elif reply == "d":
             print("\n--- Add New Product ---")
