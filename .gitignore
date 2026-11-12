@@ -6,3 +6,5 @@ __pycache__/inventory_class.cpython-314.pyc
 __pycache__/physical_product_class.cpython-314.pyc
 __pycache__/product_class.cpython-314.pyc
 __pycache__/supplier_class.cpython-314.pyc
+__pycache__/order_line_class.cpython-314.pyc
+__pycache__/order_class.cpython-314.pyc

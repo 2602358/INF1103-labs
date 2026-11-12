@@ -2,6 +2,7 @@ from file_handling import load_inventory, save_inventory
 from physical_product_class import Physical_product
 from digital_product_class import Digital_product
 from supplier_class import Supplier
+from order_class import Order
 
 def get_valid_supplier(prompt):
     while True:
@@ -129,6 +130,29 @@ def search_product(inventory):
     else:
         print("No matching products found.")
 
+def create_order(inventory):
+    print("\n--- Create Order ---")
+    order = Order(input("Enter Order ID: ").strip())
+
+    while True:
+        product_id = input("Enter Product ID to add (or press Enter to finish): ").strip()
+        if not product_id:
+            break
+        product = inventory.find_product(product_id)
+        if product is None:
+            print("Product ID not found.")
+            continue
+        quantity = get_valid_stock("Enter quantity: ")
+        if quantity == 0:
+            print("Quantity must be at least 1.")
+            continue
+        order.add_order_line(product, quantity)
+        print(f"Added {quantity} x {product.name}.")
+
+    if order.order_lines:
+        order.display_order()
+    else:
+        print("Order is empty.")
 
 def main():
     inventory = load_inventory()
@@ -143,9 +167,10 @@ def main():
         print("4. Remove Product")
         print("5. Search Product")
         print("6. Save Inventory")
-        print("7. Exit")
+        print("7. Create Order")
+        print("8. Exit")
 
-        choice = input("\nSelect an option (1-6): ").strip()
+        choice = input("\nSelect an option (1-8): ").strip()
 
         match choice:
             case "1":
@@ -162,6 +187,8 @@ def main():
             case "6":
                 save_inventory(inventory)
             case "7":
+                create_order(inventory)
+            case "8":
                 print("Exiting system. Goodbye!")
                 break
             case _:
