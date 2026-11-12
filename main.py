@@ -114,6 +114,12 @@ def update_stock(inventory):
     product.update_stock(get_valid_stock("Enter New Stock Quantity: "))
     print(f"Stock updated successfully for {product.name}.")
 
+def remove_product(inventory):
+    print("\n--- Remove Product ---")
+    if inventory.remove_product(input("Enter Product ID to remove: ")):
+        print("Product removed from inventory.")
+    else:
+        print("Product ID not found.")
 
 def search_product(inventory):
     print("\n--- Search Product ---")
@@ -134,9 +140,10 @@ def main():
         print("1. Display All Products")
         print("2. Add New Product")
         print("3. Update Product Stock")
-        print("4. Search Product")
-        print("5. Save Inventory")
-        print("6. Exit")
+        print("4. Remove Product")
+        print("5. Search Product")
+        print("6. Save Inventory")
+        print("7. Exit")
 
         choice = input("\nSelect an option (1-6): ").strip()
 
@@ -149,10 +156,12 @@ def main():
             case "3":
                 update_stock(inventory)
             case "4":
-                search_product(inventory)
+                remove_product(inventory)
             case "5":
-                save_inventory(inventory)
+                search_product(inventory)
             case "6":
+                save_inventory(inventory)
+            case "7":
                 print("Exiting system. Goodbye!")
                 break
             case _:

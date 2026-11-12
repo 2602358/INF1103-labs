@@ -2,49 +2,27 @@
     {
         "type": "physical",
         "id": "P001",
-        "name": "PC",
-        "price": 3500.0,
-        "stock": 3,
-        "weight": 3.1
+        "name": "Laptop",
+        "price": 1200.0,
+        "stock": 15,
+        "weight": 2.0,
+        "supplier": {
+            "id": "S001",
+            "name": "Acme Ltd",
+            "email": "sales@acme.com"
+        }
     },
     {
         "type": "physical",
         "id": "P002",
-        "name": "keyboard",
-        "price": 150.0,
-        "stock": 20,
-        "weight": 0.25
-    },
-    {
-        "type": "digital",
-        "id": "P003",
-        "name": "Microsoft Office",
-        "price": 20.0,
-        "stock": 5,
-        "size": 10.0
-    },
-    {
-        "type": "physical",
-        "id": "P004",
         "name": "Mouse",
-        "price": 50.0,
-        "stock": 20,
-        "weight": 0.1
-    },
-    {
-        "type": "physical",
-        "id": "P005",
-        "name": "Mousepad",
-        "price": 35.0,
-        "stock": 20,
-        "weight": 0.3
-    },
-    {
-        "type": "digital",
-        "id": "P006",
-        "name": "Windows 11",
-        "price": 20.0,
+        "price": 25.5,
         "stock": 50,
-        "size": 25.0
+        "weight": 0.1,
+        "supplier": {
+            "id": "S001",
+            "name": "Acme Ltd",
+            "email": "sales@acme.com"
+        }
     }
 ]

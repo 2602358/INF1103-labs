@@ -2,14 +2,21 @@ from product_class import Product
 
 class Inventory:
     def __init__(self):
-        self.__products = []
+        self.__products: list[Product] = []
 
     def add_product(self, product):
-        if self.find_by_id(product.product_id) is not None:
+        if self.find_product(product.product_id) is not None:
             raise ValueError(f"Product ID {product.product_id} already exists.")
         self.__products.append(product)
 
-    def find_by_id(self, product_id):
+    def remove_product(self, product_id):
+        product = self.find_product(product_id)
+        if product is None:
+            return False
+        self.__products.remove(product)
+        return True
+
+    def find_product(self, product_id):
         for product in self.__products:
             if product.product_id.lower() == str(product_id).strip().lower():
                 return product
