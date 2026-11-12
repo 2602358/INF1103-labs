@@ -3,21 +3,9 @@ from physical_product_class import Physical_product
 from digital_product_class import Digital_product
 from supplier_class import Supplier
 from order_class import Order
+from inventory_class import Inventory
 
-def get_valid_supplier(prompt):
-    while True:
-        value = input(prompt).strip()
-        if value:
-            return value
-        print("Error: This field cannot be empty.")
-
-def get_supplier():
-    supplier_id = get_valid_supplier("Enter Supplier ID: ")
-    supplier_name = get_valid_supplier("Enter Supplier Name: ")
-    contact_email = get_valid_supplier("Enter Supplier Email: ")
-    return Supplier(supplier_id, supplier_name, contact_email)
-
-def get_valid_p_or_d(prompt):
+def get_valid_p_or_d(prompt: str) -> str:
     while True:
         reply = input(prompt).strip()
         if reply.strip() == "p":
@@ -27,7 +15,7 @@ def get_valid_p_or_d(prompt):
         else:
             print("Error")
 
-def get_valid_name(prompt):
+def get_valid_name(prompt: str) -> str:
     while True:
         value = input(prompt).strip()
         if value:
@@ -35,7 +23,7 @@ def get_valid_name(prompt):
         print("Error: Product name cannot be empty.")
 
 
-def get_valid_price(prompt):
+def get_valid_price(prompt: str) -> float:
     while True:
         try:
             value = float(input(prompt).strip())
@@ -46,7 +34,7 @@ def get_valid_price(prompt):
             print("Error. Please enter a valid price.")
 
 
-def get_valid_stock(prompt):
+def get_valid_stock(prompt: str) -> int:
     while True:
         value = input(prompt).strip()
         if value.isdigit():
@@ -56,7 +44,7 @@ def get_valid_stock(prompt):
         else:
             print("Error. Please enter a valid positive number.")
 
-def get_valid_weight(prompt):
+def get_valid_weight(prompt: str) -> float:
     while True:
         try:
             value = float(input(prompt).strip())
@@ -66,7 +54,7 @@ def get_valid_weight(prompt):
         except ValueError:
             print("Error. Please enter a valid price.")
 
-def get_valid_size(prompt):
+def get_valid_size(prompt: str) -> float:
     while True:
         try:
             value = float(input(prompt).strip())
@@ -76,7 +64,20 @@ def get_valid_size(prompt):
         except ValueError:
             print("Error. Please enter a valid price.")
 
-def add_product(inventory):
+def get_valid_supplier(prompt: str) -> str:
+    while True:
+        value = input(prompt).strip()
+        if value:
+            return value
+        print("Error: This field cannot be empty.")
+
+def get_supplier() -> Supplier:
+    supplier_id = get_valid_supplier("Enter Supplier ID: ")
+    supplier_name = get_valid_supplier("Enter Supplier Name: ")
+    contact_email = get_valid_supplier("Enter Supplier Email: ")
+    return Supplier(supplier_id, supplier_name, contact_email)
+
+def add_product(inventory: Inventory) -> None:
         reply = get_valid_p_or_d("Enter p or d to add a physical or digital product respectively: ")
         if reply == "p":
             print("\n--- Add New Product ---")
@@ -105,9 +106,9 @@ def add_product(inventory):
             product.get_fulfilment_info()
 
 
-def update_stock(inventory):
+def update_stock(inventory: Inventory) -> None:
     print("\n--- Update Product Stock ---")
-    product = inventory.find_by_id(input("Enter Product ID to update: "))
+    product = inventory.find_product(input("Enter Product ID to update: "))
     if product is None:
         print("Product ID not found.")
         return
@@ -115,14 +116,14 @@ def update_stock(inventory):
     product.update_stock(get_valid_stock("Enter New Stock Quantity: "))
     print(f"Stock updated successfully for {product.name}.")
 
-def remove_product(inventory):
+def remove_product(inventory: Inventory) -> None:
     print("\n--- Remove Product ---")
     if inventory.remove_product(input("Enter Product ID to remove: ")):
         print("Product removed from inventory.")
     else:
         print("Product ID not found.")
 
-def search_product(inventory):
+def search_product(inventory: Inventory) -> None:
     print("\n--- Search Product ---")
     results = inventory.search_product(input("Enter product name to search: "))
     if results:
@@ -130,7 +131,7 @@ def search_product(inventory):
     else:
         print("No matching products found.")
 
-def create_order(inventory):
+def create_order(inventory: Inventory) -> None:
     print("\n--- Create Order ---")
     order = Order(input("Enter Order ID: ").strip())
 
@@ -154,7 +155,7 @@ def create_order(inventory):
     else:
         print("Order is empty.")
 
-def main():
+def main() -> None:
     inventory = load_inventory()
 
     while True:
@@ -192,7 +193,7 @@ def main():
                 print("Exiting system. Goodbye!")
                 break
             case _:
-                print("Invalid selection. Please choose an option between 1 and 6.")
+                print("Invalid selection. Please choose an option between 1 and 8.")
 
 
 if __name__ == "__main__":

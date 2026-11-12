@@ -5,12 +5,14 @@ from inventory_class import Inventory
 from physical_product_class import Physical_product
 from digital_product_class import Digital_product
 from supplier_class import Supplier
+from product_class import Product
 
 FILENAME = "inventory.json"
 
-PRODUCT_TYPES = {"physical": Physical_product, "digital": Digital_product}
+PRODUCT_TYPES: dict[str, type[Product]] = {"physical": Physical_product,
+                                           "digital": Digital_product}
 
-def load_inventory(filename=FILENAME):
+def load_inventory(filename: str = FILENAME) -> Inventory:
     inventory = Inventory()
     if os.path.exists(filename):
         try:
@@ -22,14 +24,14 @@ def load_inventory(filename=FILENAME):
             print("Error reading inventory file. Starting with an empty inventory.")
             return Inventory()
     else:
-        example = Supplier("S001", "Acme Ltd", "sales@acme.com")
+        example = Supplier("S001", "Example Ltd", "sales@Exmaple.com")
         inventory.add_product(Physical_product("P001", "Laptop", 1200.00, 15, 2, example))
         inventory.add_product(Physical_product("P002", "Mouse", 25.50, 50, 0.10, example))
         inventory.add_product(Physical_product("P003", "Keyboard", 45.00, 30, 0.25, example))
     return inventory
 
 
-def save_inventory(inventory, filename=FILENAME):
+def save_inventory(inventory: Inventory, filename: str = FILENAME) -> None:
     with open(filename, "w") as file:
         json.dump([p.to_dict() for p in inventory.get_products()], file, indent=4)
     print(f"Inventory successfully saved to '{filename}'.")
