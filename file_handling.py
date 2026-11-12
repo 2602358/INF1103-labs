@@ -4,6 +4,7 @@ import os
 from inventory_class import Inventory
 from physical_product_class import Physical_product
 from digital_product_class import Digital_product
+from supplier_class import Supplier
 
 FILENAME = "inventory.json"
 
@@ -21,9 +22,10 @@ def load_inventory(filename=FILENAME):
             print("Error reading inventory file. Starting with an empty inventory.")
             return Inventory()
     else:
-        inventory.add_product(Physical_product("P001", "Laptop", 1200.00, 15, 2))
-        inventory.add_product(Physical_product("P002", "Mouse", 25.50, 50, 0.10))
-        inventory.add_product(Physical_product("P003", "Keyboard", 45.00, 30, 0.25))
+        example = Supplier("S001", "Acme Ltd", "sales@acme.com")
+        inventory.add_product(Physical_product("P001", "Laptop", 1200.00, 15, 2, example))
+        inventory.add_product(Physical_product("P002", "Mouse", 25.50, 50, 0.10, example))
+        inventory.add_product(Physical_product("P003", "Keyboard", 45.00, 30, 0.25, example))
     return inventory
 
 

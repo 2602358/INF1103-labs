@@ -1,6 +1,20 @@
 from file_handling import load_inventory, save_inventory
 from physical_product_class import Physical_product
 from digital_product_class import Digital_product
+from supplier_class import Supplier
+
+def get_valid_supplier(prompt):
+    while True:
+        value = input(prompt).strip()
+        if value:
+            return value
+        print("Error: This field cannot be empty.")
+
+def get_supplier():
+    supplier_id = get_valid_supplier("Enter Supplier ID: ")
+    supplier_name = get_valid_supplier("Enter Supplier Name: ")
+    contact_email = get_valid_supplier("Enter Supplier Email: ")
+    return Supplier(supplier_id, supplier_name, contact_email)
 
 def get_valid_p_or_d(prompt):
     while True:
@@ -69,7 +83,8 @@ def add_product(inventory):
             price = get_valid_price("Enter Price: ")
             stock = get_valid_stock("Enter Stock Quantity: ")
             weight = get_valid_weight("Enter Weight(kg): ")
-            product = Physical_product(inventory.get_next_id(), name, price, stock, weight, )
+            supplier = get_supplier()
+            product = Physical_product(inventory.get_next_id(), name, price, stock, weight, supplier)
             inventory.add_product(product)
             print(f"\nSuccessfully added: ID: {product.product_id}, "
                     f"Name: {product.name}, Stock: {product.stock}, Weight: {product.weight}")
@@ -81,7 +96,8 @@ def add_product(inventory):
             price = get_valid_price("Enter Price: ")
             stock = get_valid_stock("Enter Stock Quantity: ")
             size = get_valid_size("Enter size(gb): ")
-            product = Digital_product(inventory.get_next_id(), name, price, stock, size)
+            supplier = get_supplier()
+            product = Digital_product(inventory.get_next_id(), name, price, stock, size, supplier)
             inventory.add_product(product)
             print(f"\nSuccessfully added: ID: {product.product_id}, "
                         f"Name: {product.name}, Stock: {product.stock}, Size: {product.size}")

@@ -1,8 +1,9 @@
 from product_class import Product
+from supplier_class import Supplier
 
 class Digital_product(Product):
-    def __init__(self, product_id, name, price, stock, size):
-        super().__init__(product_id, name, price, stock)
+    def __init__(self, product_id, name, price, stock, size, supplier: Supplier):
+        super().__init__(product_id, name, price, stock, supplier)
         self.__size = float(size)
 
     @property
@@ -19,8 +20,10 @@ class Digital_product(Product):
 
     def to_dict(self):
         return {"type": "digital", "id": self.product_id, "name": self.name,
-                "price": self.price, "stock": self.stock, "size": self.size}
+                "price": self.price, "stock": self.stock, "size": self.size,
+                "supplier": self.supplier.to_dict()}
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["id"], data["name"], data.get("price", 0.0), data["stock"], data["size"])
+        return cls(data["id"], data["name"], data.get("price", 0.0), data["stock"],
+                data["size"], Supplier.from_dict(data["supplier"]))
