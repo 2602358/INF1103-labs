@@ -86,11 +86,11 @@ def add_product(inventory: Inventory) -> None:
             stock = get_valid_stock("Enter Stock Quantity: ")
             weight = get_valid_weight("Enter Weight(kg): ")
             supplier = get_supplier()
-            product = Physical_product(inventory.get_next_id(), name, price, stock, weight, supplier)
-            inventory.add_product(product)
-            print(f"\nSuccessfully added: ID: {product.product_id}, "
-                    f"Name: {product.name}, Stock: {product.stock}, Weight: {product.weight}")
-            print(product.get_fulfilment_info())
+            physical = Physical_product(inventory.get_next_id(), name, price, stock, weight, supplier)
+            inventory.add_product(physical)
+            print(f"\nSuccessfully added: ID: {physical.product_id}, "
+                    f"Name: {physical.name}, Stock: {physical.stock}, Weight: {physical.weight}")
+            print(physical.get_fulfilment_info())
 
         elif reply == "d":
             print("\n--- Add New Product ---")
@@ -99,11 +99,11 @@ def add_product(inventory: Inventory) -> None:
             stock = get_valid_stock("Enter Stock Quantity: ")
             size = get_valid_size("Enter size(gb): ")
             supplier = get_supplier()
-            product = Digital_product(inventory.get_next_id(), name, price, stock, size, supplier)
-            inventory.add_product(product)
-            print(f"\nSuccessfully added: ID: {product.product_id}, "
-                        f"Name: {product.name}, Stock: {product.stock}, Size: {product.size}")
-            print(product.get_fulfilment_info())
+            digital = Digital_product(inventory.get_next_id(), name, price, stock, size, supplier)
+            inventory.add_product(digital)
+            print(f"\nSuccessfully added: ID: {digital.product_id}, "
+                        f"Name: {digital.name}, Stock: {digital.stock}, Size: {digital.size}")
+            print(digital.get_fulfilment_info())
 
 
 def update_stock(inventory: Inventory) -> None:
