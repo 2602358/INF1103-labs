@@ -8,8 +8,8 @@
         "weight": 2.0,
         "supplier": {
             "id": "S001",
-            "name": "Acme Ltd",
-            "email": "sales@acme.com"
+            "name": "Example Ltd",
+            "email": "sales@exmaple.com"
         }
     },
     {
@@ -21,8 +21,21 @@
         "weight": 0.1,
         "supplier": {
             "id": "S001",
-            "name": "Acme Ltd",
-            "email": "sales@acme.com"
+            "name": "Example Ltd",
+            "email": "sales@exmaple.com"
+        }
+    },
+    {
+        "type": "digital",
+        "id": "P004",
+        "name": "Windows 11",
+        "price": 25.0,
+        "stock": 50,
+        "size": 25.0,
+        "supplier": {
+            "id": "S002",
+            "name": "Microsoft",
+            "email": "sales@microsoft.com"
         }
     }
 ]
