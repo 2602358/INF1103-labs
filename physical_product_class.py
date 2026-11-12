@@ -22,10 +22,10 @@ class Physical_product(Product, CanBeShipped):
     def calculate_shipping_cost(self) -> float:
         return self.weight * 3
 
-    def get_fulfilment_info(self) -> None:
-        print(f"{self.name} is a physical product. It requires shipping "
-              f"({self.weight} kg) and will be dispatched from the warehouse. "
-              f"(The shipping will cost ${self.calculate_shipping_cost():.2f})")
+    def get_fulfilment_info(self) -> str:
+        return (f"{self.name} is a physical product. It requires shipping "
+                f"({self.weight} kg) and will be dispatched from the warehouse. "
+                f"(The shipping will cost ${self.calculate_shipping_cost():.2f})")
 
     def to_dict(self) -> dict[str, Any]:
         return {"type": "physical", "id": self.product_id, "name": self.name,

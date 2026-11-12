@@ -7,7 +7,7 @@ from inventory_class import Inventory
 
 def get_valid_p_or_d(prompt: str) -> str:
     while True:
-        reply = input(prompt).strip()
+        reply = input(prompt).strip().lower()
         if reply.strip() == "p":
             return reply
         elif reply.strip() == "d":
@@ -52,7 +52,7 @@ def get_valid_weight(prompt: str) -> float:
                 return value
             print("Negative weight rejected.")
         except ValueError:
-            print("Error. Please enter a valid price.")
+            print("Error. Please enter a valid weight.")
 
 def get_valid_size(prompt: str) -> float:
     while True:
@@ -62,7 +62,7 @@ def get_valid_size(prompt: str) -> float:
                 return value
             print("Negative size rejected.")
         except ValueError:
-            print("Error. Please enter a valid price.")
+            print("Error. Please enter a valid size.")
 
 def get_valid_supplier(prompt: str) -> str:
     while True:
@@ -90,7 +90,7 @@ def add_product(inventory: Inventory) -> None:
             inventory.add_product(product)
             print(f"\nSuccessfully added: ID: {product.product_id}, "
                     f"Name: {product.name}, Stock: {product.stock}, Weight: {product.weight}")
-            product.get_fulfilment_info()
+            print(product.get_fulfilment_info())
 
         elif reply == "d":
             print("\n--- Add New Product ---")
@@ -103,7 +103,7 @@ def add_product(inventory: Inventory) -> None:
             inventory.add_product(product)
             print(f"\nSuccessfully added: ID: {product.product_id}, "
                         f"Name: {product.name}, Stock: {product.stock}, Size: {product.size}")
-            product.get_fulfilment_info()
+            print(product.get_fulfilment_info())
 
 
 def update_stock(inventory: Inventory) -> None:

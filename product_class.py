@@ -40,7 +40,7 @@ class Product(ABC):
               f"${self.__price:<9.2f}{self.__stock:<10}")
 
     @abstractmethod
-    def get_fulfilment_info(self) -> None:
+    def get_fulfilment_info(self) -> str:
         pass
 
     @abstractmethod

@@ -18,9 +18,9 @@ class Digital_product(Product):
         print(f"{self.product_id:<10}{self.name:<20}"
               f"${self.price:<9.2f}{self.stock:<10}{self.size:<10}")
 
-    def get_fulfilment_info(self) -> None:
-        print(f"{self.name} is a digital product. No shipping is needed; "
-              f"it is delivered electronically ({self.size} GB download).")
+    def get_fulfilment_info(self) -> str:
+        return (f"{self.name} is a digital product. No shipping is needed; "
+            f"it is delivered electronically ({self.size} GB download).")
 
     def to_dict(self) -> dict[str, Any]:
         return {"type": "digital", "id": self.product_id, "name": self.name,

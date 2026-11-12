@@ -24,7 +24,7 @@ def load_inventory(filename: str = FILENAME) -> Inventory:
             print("Error reading inventory file. Starting with an empty inventory.")
             return Inventory()
     else:
-        example = Supplier("S001", "Example Ltd", "sales@Exmaple.com")
+        example = Supplier("S001", "Example Ltd", "sales@exmaple.com")
         inventory.add_product(Physical_product("P001", "Laptop", 1200.00, 15, 2, example))
         inventory.add_product(Physical_product("P002", "Mouse", 25.50, 50, 0.10, example))
         inventory.add_product(Physical_product("P003", "Keyboard", 45.00, 30, 0.25, example))
