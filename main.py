@@ -1,6 +1,6 @@
 from file_handling import load_inventory, save_inventory
-from physical_product_class import Physical_product
-from digital_product_class import Digital_product
+from product_factory import ProductFactory
+from discount_strategy import (DiscountStrategy, NoDiscount, PercentageDiscount, BulkDiscount, StudentDiscount)
 from supplier_class import Supplier
 from order_class import Order
 from inventory_class import Inventory
@@ -23,15 +23,16 @@ def get_valid_name(prompt: str) -> str:
         print("Error: Product name cannot be empty.")
 
 
-def get_valid_price(prompt: str) -> float:
+def get_positive_float(prompt: str) -> float:
     while True:
         try:
             value = float(input(prompt).strip())
-            if value >= 0:
-                return value
-            print("Negative prices rejected.")
+            if value <= 0:
+                print("Please enter a number greater than zero.")
+                continue
+            return value
         except ValueError:
-            print("Error. Please enter a valid price.")
+            print("Please enter a valid number, e.g. 12.50")
 
 
 def get_valid_stock(prompt: str) -> int:
@@ -78,32 +79,24 @@ def get_supplier() -> Supplier:
     return Supplier(supplier_id, supplier_name, contact_email)
 
 def add_product(inventory: Inventory) -> None:
-        reply = get_valid_p_or_d("Enter p or d to add a physical or digital product respectively: ")
-        if reply == "p":
-            print("\n--- Add New Product ---")
-            name = get_valid_name("Enter Product Name: ")
-            price = get_valid_price("Enter Price: ")
-            stock = get_valid_stock("Enter Stock Quantity: ")
-            weight = get_valid_weight("Enter Weight(kg): ")
-            supplier = get_supplier()
-            physical = Physical_product(inventory.get_next_id(), name, price, stock, weight, supplier)
-            inventory.add_product(physical)
-            print(f"\nSuccessfully added: ID: {physical.product_id}, "
-                    f"Name: {physical.name}, Stock: {physical.stock}, Weight: {physical.weight}")
-            print(physical.get_fulfilment_info())
-
-        elif reply == "d":
-            print("\n--- Add New Product ---")
-            name = get_valid_name("Enter Product Name: ")
-            price = get_valid_price("Enter Price: ")
-            stock = get_valid_stock("Enter Stock Quantity: ")
-            size = get_valid_size("Enter size(gb): ")
-            supplier = get_supplier()
-            digital = Digital_product(inventory.get_next_id(), name, price, stock, size, supplier)
-            inventory.add_product(digital)
-            print(f"\nSuccessfully added: ID: {digital.product_id}, "
-                        f"Name: {digital.name}, Stock: {digital.stock}, Size: {digital.size}")
-            print(digital.get_fulfilment_info())
+    reply = get_valid_p_or_d("Enter p or d to add a physical or digital product respectively: ")
+    print("\n--- Add New Product ---")
+    name = get_valid_name("Enter Product Name: ")
+    price = get_positive_float("Enter Price: ")
+    stock = get_valid_stock("Enter Stock Quantity: ")
+    if reply == "p":
+        product_type = "physical"
+        weight_or_size = get_valid_weight("Enter Weight(kg): ")
+    else:
+        product_type = "digital"
+        weight_or_size = get_valid_size("Enter size(gb): ")
+    supplier = get_supplier()
+    product = ProductFactory.create(product_type, inventory.get_next_id(), name,
+                                    price, stock, weight_or_size, supplier)
+    inventory.add_product(product)
+    print(f"\nSuccessfully added: ID: {product.product_id}, "
+          f"Name: {product.name}, Stock: {product.stock}")
+    print(product.get_fulfilment_info())
 
 
 def update_stock(inventory: Inventory) -> None:
@@ -131,9 +124,25 @@ def search_product(inventory: Inventory) -> None:
     else:
         print("No matching products found.")
 
+DISCOUNT_OPTIONS: dict[str, tuple[str, DiscountStrategy]] = {
+    "1": ("No discount", NoDiscount()),
+    "2": ("10% off", PercentageDiscount(10)),
+    "3": ("20 off orders of 200 or more", BulkDiscount(200, 20)),
+    "4": ("Student (5% off)", StudentDiscount()),
+}
+
+def get_discount() -> DiscountStrategy:
+    while True:
+        for key, (label, _) in DISCOUNT_OPTIONS.items():
+            print(f"  {key}. {label}")
+        choice = input("Select a discount: ").strip()
+        if choice in DISCOUNT_OPTIONS:
+            return DISCOUNT_OPTIONS[choice][1]
+        print("Invalid selection.")
+
 def create_order(inventory: Inventory) -> None:
     print("\n--- Create Order ---")
-    order = Order(input("Enter Order ID: ").strip())
+    order = Order(input("Enter Order ID: ").strip(), get_discount())
 
     while True:
         product_id = input("Enter Product ID to add (or press Enter to finish): ").strip()
