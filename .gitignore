@@ -8,3 +8,7 @@ __pycache__/product_class.cpython-314.pyc
 __pycache__/supplier_class.cpython-314.pyc
 __pycache__/order_line_class.cpython-314.pyc
 __pycache__/order_class.cpython-314.pyc
+__pycache__/discount_strategy.cpython-314.pyc
+__pycache__/main.cpython-314.pyc
+__pycache__/product_factory.cpython-314.pyc
+__pycache__/test_code.cpython-314-pytest-9.2.0.pyc

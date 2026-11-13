@@ -6,10 +6,13 @@ from supplier_class import Supplier
 
 class Product(ABC):
     def __init__(self, product_id: str, name: str, price: float,
-                 stock: int, supplier: Supplier) -> None:
+                stock: int, supplier: Supplier) -> None:
         self.__product_id: str = str(product_id)
         self.__name: str = name
-        self.__price: float = float(price)
+        price = float(price)
+        if price <= 0:
+            raise ValueError("Price must be greater than zero.")
+        self.__price: float = price
         self.__stock: int = 0
         self.update_stock(stock)
         self.supplier: Supplier = supplier
